@@ -9,7 +9,11 @@ interface IFormData {
 }
 
 const SignUp = () => {
-  const [formData, setFormData] = useState<IFormData>({});
+  const [formData, setFormData] = useState<IFormData>({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -51,7 +55,7 @@ const SignUp = () => {
         navigate("/login");
       }
     } catch (error) {
-      setErrorMessage(data.message);
+      setErrorMessage("An error ocurred");
       setLoading(false);
     }
   };
@@ -98,7 +102,10 @@ const SignUp = () => {
                 </p>
               )}
               <div className="flex flex-col md:flex-row gap-2 md:gap-4 justify-center items-center">
-                <button className="btn btn-active btn-primary btn-block ">
+                <button
+                  disabled={loading}
+                  className="btn btn-active btn-primary btn-block "
+                >
                   Sign Up
                   {loading && (
                     <span className="loading loading-spinner loading-sm"></span>
